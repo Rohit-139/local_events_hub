@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   devise_for :users , controllers: {
   registrations: "users/registrations",
   sessions: "users/sessions"
@@ -6,6 +7,11 @@ Rails.application.routes.draw do
 
 namespace :admin do 
   resources :events
+end
+
+namespace :user do 
+  resources :events, only: [:index, :show]
+  resources :addresses, only: [:new, :create, :edit, :update]
 end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

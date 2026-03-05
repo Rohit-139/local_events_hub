@@ -1,0 +1,10 @@
+this is index
+<%if  @events.present? %>
+<% @events.each do |event| %>
+<h1>Event name :  <%= event.name %></h1> 
+<% end %>
+<% else %>
+<h2>no restaurant in near 5 km</h2>
+<% end %>
+
+<h3><%= button_to "Logout", destroy_user_session_path, method: :delete %></h3>
