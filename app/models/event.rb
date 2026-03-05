@@ -1,4 +1,6 @@
 class Event < ApplicationRecord
+  has_one_attached :image
+
   validates :name, :description, :total_seat, :ticket_price, :street, :city, :state, presence: true
     validates :total_seat, numericality: {
     greater_than_or_equal_to: 10,
@@ -41,6 +43,8 @@ class Event < ApplicationRecord
   def set_available_seat
   self.available_seat ||= total_seat
 end
+
+
 
  
 end

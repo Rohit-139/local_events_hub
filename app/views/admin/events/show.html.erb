@@ -1,0 +1,24 @@
+<div>
+	<span><%= link_to "Back to home Page ", admin_events_path %></span>
+	<h1 align="center"><%= @event.name  %></h1>
+</div>
+<h4>Description : </h4>
+<p><%= @event.description %></p>
+<div style="display: flex; gap: 150px;">
+	<h2>Total Seat : <%= @event.total_seat %></h2>
+	<h2>Available Seat :  <%= @event.available_seat %></h2>
+	<h2>Ticket Price : <%= @event.ticket_price %></h2>
+</div>
+<div>
+	<% if @event.image.attached? %>
+	<%= image_tag @event.image.representation(resize_to_limit: [1000,1000]) %>
+	<% else %>
+	<h1>No image for this event</h1>
+	<% end %>
+</div>
+
+<div>
+	<h2>Address : <%=" #{@event.street} #{@event.city}, #{@event.state}" %></h2>
+</div>
+
+<h3><%= link_to "Edit the event ", edit_admin_event_path(@event)%></h3>
