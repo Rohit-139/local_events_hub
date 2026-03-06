@@ -1,0 +1,17 @@
+<%= turbo_stream.update "otp_container" do %>
+  <%= form_with url: user_verify_otp_path, method: :post do |f| %>
+    <%= f.telephone_field :otp, 
+    placeholder: "Enter 5-digit OTP", 
+    required: true, 
+    maxlength: 5, 
+    minlength: 5, 
+    pattern: "[0-9]{5}", 
+    title: "Please enter exactly 5 digits" 
+%>
+  <%= f.hidden_field :id, value: @id %>
+
+    <br><br>
+    <%= f.submit "Confirm", id: "confirm_btn" %>
+  <% end %>
+<% end %>
+

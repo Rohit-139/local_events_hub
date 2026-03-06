@@ -1,0 +1,13 @@
+<h1>Verify Email</h1>
+
+<%= turbo_frame_tag "otp_form" do %>
+  <%= form_with url: user_send_otp_path, method: :post do |f| %>
+    <p>Email: <%= current_user.email %></p>
+  <%= f.hidden_field :id, value: @id %>
+    <div id="otp_container">
+      <%= f.submit "Send OTP", id: "submit_btn" %>
+    </div>
+  <% end %>
+<% end %>
+
+<div id="flash_messages"></div>

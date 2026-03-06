@@ -1,2 +1,5 @@
-<h1>User::Address#edit</h1>
-<p>Find me in app/views/user/address/edit.html.erb</p>
+ <div>
+ 	<span><%= link_to "Back to home Page ", admin_events_path %></span>
+ 	<h1>Edit the address</h1>
+ </div>
+ <%= render "form", address: @address %>

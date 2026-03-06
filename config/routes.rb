@@ -12,6 +12,11 @@ end
 namespace :user do 
   resources :events, only: [:index, :show]
   resources :addresses, only: [:new, :create, :edit, :update]
+  get "booking/:id", to: "bookings#book", as: :book_event
+  post "sendotp", to:"bookings#send_otp", as: :send_otp
+  post "verifyotp", to: "bookings#verify_otp", as: :verify_otp
+  get "ticket/:id", to: "bookings#ticket", as: :ticket
+  get "mailticket/:id", to:"bookings#mail_ticket", as: :mail_ticket
 end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -25,4 +30,12 @@ end
 
   # Defines the root path route ("/")
   # root "posts#index"
+  match "*unmatched_route", to: redirect("/"), via: :all
+   devise_scope :user do
+    unauthenticated do
+      root to: 'devise/sessions#new', as: :unauthenticated_root
+    end
+  end
+
+  
 end

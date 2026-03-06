@@ -1,10 +1,35 @@
-this is index
-<%if  @events.present? %>
-<% @events.each do |event| %>
-<h1>Event name :  <%= event.name %></h1> 
+<div style="display: flex; gap: 200px;">
+	<%= form_with url: user_events_path, method: :get, local: true do |f| %>
+  <%= f.label :distance, "Events within (km):" %>
+  <%= f.number_field :distance, value: @distance, min: 1 %>
+  <%= f.submit "Filter" %>
 <% end %>
+<h4><%= link_to "Change address", edit_user_address_path(current_user) %></h4>
+<h3><%= button_to "Logout", destroy_user_session_path, method: :delete %></h3>
+</div>
+
+
+<% if @events.present? %>
+<h3>All events under <%= @distance %>  km </h3>
+    <table border="2px" cellpadding="10px">
+        <tr>
+        <th>Name</th>
+        <th>total_seat</th>
+        <th>ticket</th>
+        <th>Action</th>
+        </tr>
+            <% @events.each do |event| %>
+            <tr id="<%= dom_id(event) %>">
+            <td><%= event.name%></td>
+            <td><%= event.total_seat%></td>
+            <td><%= event.ticket_price%></td>
+            <td> <%= link_to "Show", user_event_path(event)%></td>
+            </tr>
+            <% end %>
+    </table>
+
 <% else %>
-<h2>no restaurant in near 5 km</h2>
+<h2>no Events in near <%= @distance %> km</h2>
 <% end %>
 
-<h3><%= button_to "Logout", destroy_user_session_path, method: :delete %></h3>
+

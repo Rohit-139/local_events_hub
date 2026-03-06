@@ -24,7 +24,12 @@
   </head>
 
   <body>
-    <%= render "layouts/flash_message" %>
+    <%# render "layouts/flash_message" %>
+    <% flash.each do |type, msg| %>
+      <div>
+        <%= msg %>
+      </div>
+    <% end %>
     <%= yield %>
   </body>
 </html>

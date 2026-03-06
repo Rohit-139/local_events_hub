@@ -1,15 +1,18 @@
 class User::EventsController < ApplicationController
   before_action :authenticate_user!
   before_action :check_user
+
   def index
     if !current_user.address.present?
       redirect_to new_user_address_path 
     else
-      @events = Event.near([current_user.address.latitude, current_user.address.longitude],5, units: :km)
+      @distance = params[:distance].present? ? params[:distance].to_i : 5
+      @events = Event.near([current_user.address.latitude, current_user.address.longitude],@distance, units: :km)
     end
   end
 
   def show
+    @event = Event.find(params[:id])
   end
 
   private 

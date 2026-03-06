@@ -1,2 +1,31 @@
-<h1>User::Events#show</h1>
-<p>Find me in app/views/user/events/show.html.erb</p>
+<div>
+	<span><%= link_to "Back to home Page ", admin_events_path %></span>
+	<h1 align="center"><%= @event.name  %></h1>
+</div>
+<h4>Description : </h4>
+<p><%= @event.description %></p>
+<div style="display: flex; gap: 150px;">
+	<h2>Total Seat : <%= @event.total_seat %></h2>
+	<h2>Available Seat :  <%= @event.available_seat %></h2>
+	<h2>Ticket Price : <%= @event.ticket_price %></h2>
+</div>
+<div>
+	<% if @event.image.attached? %>
+	<%= image_tag @event.image.representation(resize_to_limit: [1000,1000]) %>
+	<% else %>
+	<h1>No image for this event</h1>
+	<% end %>
+</div>
+
+<div style="display: flex; gap: 200px;">
+	<h2>Address : <%=" #{@event.street} #{@event.city}, #{@event.state}" %></h2>
+	<% if current_user.bookings.pluck(:event_id).any?(@event.id) %>
+	 <h2>You already booked this event</h2>
+	 <% else %>
+	  <% if @event.available_seat <= 0 %>
+	  	<h2>ticket sold out</h2>
+	  <% else %>
+	<h2><%= link_to "Book event", user_book_event_path %></h2>
+	<% end %>
+	<% end %>
+</div>

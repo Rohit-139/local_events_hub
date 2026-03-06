@@ -1,5 +1,7 @@
 class Event < ApplicationRecord
   has_one_attached :image
+  has_many :bookings 
+  has_many :users, through: :bookings
 
   validates :name, :description, :total_seat, :ticket_price, :street, :city, :state, presence: true
     validates :total_seat, numericality: {

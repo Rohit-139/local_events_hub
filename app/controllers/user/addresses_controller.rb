@@ -16,9 +16,16 @@ class User::AddressesController < ApplicationController
   end
 
   def edit
+    @address = current_user.address
   end
 
   def update
+    @address = Address.find(params[:id])
+    if @address.update(address_params)
+      redirect_to user_events_path
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
 
 

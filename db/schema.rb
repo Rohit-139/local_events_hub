@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_03_05_112459) do
+ActiveRecord::Schema[8.1].define(version: 2026_03_06_065408) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
@@ -51,6 +51,16 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_05_112459) do
     t.index ["user_id"], name: "index_addresses_on_user_id"
   end
 
+  create_table "bookings", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.integer "event_id", null: false
+    t.integer "seat_number"
+    t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.index ["event_id"], name: "index_bookings_on_event_id"
+    t.index ["user_id"], name: "index_bookings_on_user_id"
+  end
+
   create_table "events", force: :cascade do |t|
     t.integer "available_seat"
     t.string "city"
@@ -64,6 +74,14 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_05_112459) do
     t.decimal "ticket_price"
     t.integer "total_seat"
     t.datetime "updated_at", null: false
+  end
+
+  create_table "otps", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "otp"
+    t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.index ["user_id"], name: "index_otps_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -83,4 +101,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_05_112459) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "addresses", "users"
+  add_foreign_key "bookings", "events"
+  add_foreign_key "bookings", "users"
+  add_foreign_key "otps", "users"
 end
