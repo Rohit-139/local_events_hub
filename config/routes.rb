@@ -30,12 +30,12 @@ end
 
   # Defines the root path route ("/")
   # root "posts#index"
-  match "*unmatched_route", to: redirect("/"), via: :all
-   devise_scope :user do
-    unauthenticated do
-      root to: 'devise/sessions#new', as: :unauthenticated_root
-    end
-  end
+  # match "*unmatched_route", to: redirect("/"), via: :all
+  #  devise_scope :user do
+  #   unauthenticated do
+  #     root to: 'devise/sessions#new', as: :unauthenticated_root
+  #   end
+  # end
 
   
 end

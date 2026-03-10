@@ -17,6 +17,6 @@ class User::EventsController < ApplicationController
 
   private 
   def check_user
-    redirect_to new_user_session_path unless current_user.user?
+    redirect_to new_user_session_path unless current_user.type == "Customer"
   end
 end

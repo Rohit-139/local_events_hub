@@ -4,7 +4,7 @@ class Admin::EventsController < ApplicationController
   before_action :set_event , only: [:show, :edit, :update, :destroy ]
 
   def index
-    @events = Event.all
+    @events = current_user.events
   end
 
   def new 
@@ -13,6 +13,7 @@ class Admin::EventsController < ApplicationController
 
   def create 
     @event = Event.new(event_params) 
+    @event.admin_id = current_user.id
     if @event.save 
       respond_to do |format|
         format.json { render json: @event}
@@ -52,7 +53,7 @@ class Admin::EventsController < ApplicationController
 
   private
   def check_admin
-  redirect_to new_user_session_path unless current_user.admin?
+  redirect_to new_user_session_path unless current_user.type == 'Admin'
   end
 
   def event_params 

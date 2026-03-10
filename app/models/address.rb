@@ -1,7 +1,7 @@
 class Address < ApplicationRecord
-  belongs_to :user
+  belongs_to :customer, class_name: "User", foreign_key: "customer_id" 
   validates :street, :city, :state, presence: true
-  validates :user_id, uniqueness: true
+  validates :customer_id, uniqueness: true
 
   geocoded_by :address do |object, results|
     if results.present?

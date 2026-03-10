@@ -17,16 +17,13 @@ class User::BookingsController < ApplicationController
   end
 
   def verify_otp 
-  	@otp = current_user.otp.otp.to_i
-  	otp = params[:otp].to_i
-  	if otp == @otp 
-  		current_user.otp.destroy
-  		redirect_to user_ticket_path(params[:id])
-  	else
-  		flash.now[:alert] = "Wrong OTP, please try again."
-      # render turbo_stream: turbo_stream.update("flash_messages", partial: "layouts/flash_message")
+    otp = current_user.otp
+    if otp == params[:otp]
+      current_user.update(otp: nil)
+      redirect_to user_ticket_path(params[:id])
+    else
+        flash.now[:notice] = "Wrong Otp , plese try again"
     end
-
   end
 
   def ticket
@@ -37,7 +34,7 @@ class User::BookingsController < ApplicationController
   	@event = Event.find(params[:id])
 	  @event.with_lock do	
 	 	  seat_number = 1 + (@event.total_seat - @event.available_seat)
-	 	  @booking = Booking.create(user:current_user, event: @event, seat_number:seat_number)
+	 	  @booking = Booking.create(customer:current_user, event: @event, seat_number:seat_number)
 	    handle_available_seat(@event)
 	    OtpMailer.with(user: current_user, event: @event, booking: @booking).ticket_mail.deliver_now
 	  end
@@ -46,18 +43,12 @@ class User::BookingsController < ApplicationController
 
   private 
   def check_user
-    redirect_to new_user_session_path unless current_user.user?
+    redirect_to new_user_session_path unless current_user.type == "Customer"
   end
 
-  def save_otp(otp) 
-  	@otp = Otp.find_by(user: current_user)
-  	if !@otp.nil?
-  	   @otp.otp = otp 
-  	   @otp.save 
-  	else
-  	  @user = current_user
-  	  @user.create_otp(otp: otp)
-  	end
+
+  def save_otp(otp)
+    current_user.update(otp: otp)
   end
 
   def handle_available_seat(event)

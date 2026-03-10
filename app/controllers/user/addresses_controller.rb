@@ -7,7 +7,7 @@ class User::AddressesController < ApplicationController
 
   def create
     @address = Address.new(address_params)
-    @address.user = current_user
+    @address.customer_id = current_user.id
     if @address.save 
       redirect_to user_events_path
     else
@@ -31,7 +31,7 @@ class User::AddressesController < ApplicationController
 
   private 
   def check_user
-    redirect_to new_user_session_path unless current_user.user?
+    redirect_to new_user_session_path unless current_user.type == "Customer"
   end
 
   def address_params

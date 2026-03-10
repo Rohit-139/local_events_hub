@@ -28,6 +28,13 @@
     <p><%= f.password_field :password_confirmation, autocomplete: "new-password" %></p>
   </div>
 
+  <div >
+  <%= f.label :type, "For Admin" %> <br>
+  <%= f.checkbox :type %> 
+</div>
+
+<br>
+
   <div class="actions">
     <%= f.submit "Sign up" %>
   </div>
