@@ -1,0 +1,61 @@
+<br>
+<%= link_to "← Back to home", user_events_path %>
+<br><br>
+
+
+<div style="max-width:1000px;margin:40px auto;background:#ffffff;
+            padding:25px;border-radius:8px;
+            box-shadow:0 4px 12px rgba(0,0,0,0.08);
+            font-family:Arial, sans-serif;">
+
+  <h2 style="margin-bottom:20px;"> My Bookings</h2>
+
+  <% if @bookings.any? %>
+    <table style="width:100%;border-collapse:collapse;">
+      <thead>
+        <tr>
+          <th style="padding:12px;background:#222;color:#fff;text-align:left;">Booking ID</th>
+          <th style="padding:12px;background:#222;color:#fff;text-align:left;">Event name</th>
+          <th style="padding:12px;background:#222;color:#fff;text-align:left;">Seat number</th>
+          <th style="padding:12px;background:#222;color:#fff;text-align:left;">Address</th>
+          <th style="padding:12px;background:#222;color:#fff;text-align:left;">Action</th>
+          <th style="padding:12px;background:#222;color:#fff;text-align:left;">Action</th>
+
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @bookings.each do |booking| %>
+          <tr style="background:#f9f9f9;">
+            <td style="padding:12px;">#<%= booking.id %></td>
+            <td style="padding:12px;"><%= booking.event.name %></td>
+            <td style="padding:12px;"> <%= booking.seat_number %></td>
+            <td style="padding:12px;"> <%= booking.event.address %> </td>
+            <td style="padding:12px;">
+              <%= link_to "View",
+                    user_booking_path(booking),
+                    style: "text-decoration:none;
+                            background:#007bff;color:#fff;
+                            padding:6px 12px;border-radius:4px;
+                            font-size:14px;" %>
+            </td>
+
+            <td style="padding:12px;">
+              <%# link_to "Message",
+                    message_order_path(order),
+                    style: "text-decoration:none;
+                            background:#007bff;color:#fff;
+                            padding:6px 12px;border-radius:4px;
+                            font-size:14px;" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <div style="padding:15px;background:#eef;border-radius:5px;">
+      No Bookings placed yet 😔
+    </div>
+  <% end %>
+
+</div>

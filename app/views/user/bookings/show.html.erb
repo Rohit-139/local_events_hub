@@ -1,0 +1,9 @@
+  <h2>Booking</h2>
+
+  <h4>Booking id : <%= @booking.id %></h4>
+  <h4>Event name : <%= @booking.event.name %></h4>
+  <h4>Event seat number : <%= @booking.seat_number %></h4>
+  <h4>Event Address : <%= @booking.event.address %></h4>
+  <h4>Event Ticket Price : <%= @booking.event.ticket_price %></h4>
+
+  <h5><%= link_to "back to bookings", user_bookings_path%></h5>

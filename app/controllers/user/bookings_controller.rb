@@ -41,6 +41,16 @@ class User::BookingsController < ApplicationController
 	  redirect_to user_events_path
   end
 
+
+  def index
+    @bookings = current_user.bookings
+  end
+
+  def show 
+    @booking = Booking.find(params[:id])
+  end
+
+
   private 
   def check_user
     redirect_to new_user_session_path unless current_user.type == "Customer"

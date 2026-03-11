@@ -12,6 +12,7 @@ end
 namespace :user do 
   resources :events, only: [:index, :show]
   resources :addresses, only: [:new, :create, :edit, :update]
+  resources :bookings, only:[:index, :show]
   get "booking/:id", to: "bookings#book", as: :book_event
   post "sendotp", to:"bookings#send_otp", as: :send_otp
   post "verifyotp", to: "bookings#verify_otp", as: :verify_otp

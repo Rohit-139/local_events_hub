@@ -1,9 +1,10 @@
-<div style="display: flex; gap: 200px;">
+<div style="display: flex; gap: 150px;">
 	<%= form_with url: user_events_path, method: :get, local: true do |f| %>
   <%= f.label :distance, "Events within (km):" %>
   <%= f.number_field :distance, value: @distance, min: 1 %>
   <%= f.submit "Filter" %>
 <% end %>
+<h3><%= link_to "See Bookings", user_bookings_path %></h3>
 <h4><%= link_to "Change address", edit_user_address_path(current_user) %></h4>
 <h3><%= button_to "Logout", destroy_user_session_path, method: :delete %></h3>
 </div>
