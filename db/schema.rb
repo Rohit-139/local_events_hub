@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_03_10_080638) do
+ActiveRecord::Schema[8.1].define(version: 2026_03_11_054930) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
@@ -61,6 +61,13 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_10_080638) do
     t.index ["event_id"], name: "index_bookings_on_event_id"
   end
 
+  create_table "chat_rooms", force: :cascade do |t|
+    t.integer "booking_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["booking_id"], name: "index_chat_rooms_on_booking_id"
+  end
+
   create_table "events", force: :cascade do |t|
     t.integer "admin_id", null: false
     t.integer "available_seat"
@@ -76,6 +83,16 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_10_080638) do
     t.integer "total_seat"
     t.datetime "updated_at", null: false
     t.index ["admin_id"], name: "index_events_on_admin_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.text "body"
+    t.integer "chat_room_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.index ["chat_room_id"], name: "index_messages_on_chat_room_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -98,5 +115,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_10_080638) do
   add_foreign_key "addresses", "users", column: "customer_id"
   add_foreign_key "bookings", "events"
   add_foreign_key "bookings", "users", column: "customer_id"
+  add_foreign_key "chat_rooms", "bookings"
   add_foreign_key "events", "users", column: "admin_id"
+  add_foreign_key "messages", "chat_rooms"
+  add_foreign_key "messages", "users"
 end

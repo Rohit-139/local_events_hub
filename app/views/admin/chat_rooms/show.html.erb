@@ -1,0 +1,20 @@
+  <span><%= link_to "Back to home Page ", admin_index_path(@booking.event) %></span>
+
+<h2>Chat for Booking #<%= @chat_room.booking.id %></h2>
+
+<div id="chat-room-<%= @chat_room.id %>">
+  <%= turbo_stream_from @chat_room %>
+  
+  <div id="messages">
+    <%= render @messages %>
+  </div>
+<%= form_with(model: @message, 
+              url: admin_messages_path, 
+              method: :post, 
+              data: { controller: "form-reset", action: "turbo:submit-end->form-reset#reset" }) do |f| %>
+
+  <%= f.hidden_field :chat_room_id, value: @chat_room.id %>
+  <%= f.text_area :body, placeholder: "Type your message...", required: true %>
+  <%= f.submit "Send" %>
+  <%end %>
+</div>

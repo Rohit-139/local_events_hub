@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  namespace :admin do
+    get "bookings/show"
+    get "bookings/index"
+  end
+  namespace :user do
+    get "messages/create"
+    get "chat_rooms/show"
+  end
 
   devise_for :users , controllers: {
   registrations: "users/registrations",
@@ -7,12 +15,20 @@ Rails.application.routes.draw do
 
 namespace :admin do 
   resources :events
+  resources :bookings, only:[:show] do 
+    resource :chat_room, only: [:show]
+  end
+  resources :messages, only:[:create]
+   get "index/:id", to:"bookings#index", as: :index 
 end
 
 namespace :user do 
   resources :events, only: [:index, :show]
   resources :addresses, only: [:new, :create, :edit, :update]
-  resources :bookings, only:[:index, :show]
+  resources :bookings, only:[:index, :show] do
+    resource :chat_room, only:[:show]
+  end
+  resources :messages, only:[:create]
   get "booking/:id", to: "bookings#book", as: :book_event
   post "sendotp", to:"bookings#send_otp", as: :send_otp
   post "verifyotp", to: "bookings#verify_otp", as: :verify_otp
@@ -37,6 +53,18 @@ end
   #     root to: 'devise/sessions#new', as: :unauthenticated_root
   #   end
   # end
+    
+     devise_scope :user do
+    authenticated :user do
+      root to: 'admin/events#index', as: :authenticated_root # The page users see when logged in
+    end
+
+    unauthenticated do
+      root to: 'devise/sessions#new', as: :unauthenticated_root # The login page as home
+    end
+  end
+
+  match "*unmatched_route", to: redirect("/"), via: :all
 
   
 end

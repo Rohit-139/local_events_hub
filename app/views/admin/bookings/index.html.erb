@@ -1,5 +1,5 @@
 <br>
-<%= link_to "← Back to home", user_events_path %>
+<%= link_to "← Back to home", admin_events_path %>
 <br><br>
 
 
@@ -33,16 +33,15 @@
             <td style="padding:12px;"> <%= booking.event.address %> </td>
             <td style="padding:12px;">
               <%= link_to "View",
-                    user_booking_path(booking),
+                    admin_booking_path(booking),
                     style: "text-decoration:none;
                             background:#007bff;color:#fff;
                             padding:6px 12px;border-radius:4px;
                             font-size:14px;" %>
             </td>
-
             <td style="padding:12px;">
               <%= link_to "Message",
-                    user_booking_chat_room_path(booking),
+                    admin_booking_chat_room_path(booking),
                     style: "text-decoration:none;
                             background:#007bff;color:#fff;
                             padding:6px 12px;border-radius:4px;

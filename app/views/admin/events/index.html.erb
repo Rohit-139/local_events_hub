@@ -13,6 +13,7 @@
 		<th>Action</th>
 		<th>Action</th>
 		<th>Action</th>
+		<th>Action</th>
 		</tr>
 			<% @events.each do |event| %>
 			<tr id="<%= dom_id(event) %>">
@@ -22,6 +23,8 @@
 			<td> <%= link_to "Edit", edit_admin_event_path(event)%></td>
 			<td> <%= link_to "Show", admin_event_path(event)%></td>
 			<td> <%= link_to "Delete",admin_event_path(event), data: {turbo_method: :delete, turbo_confirm: 'are you sure ?'}%></td>
+			<td> <%= link_to "Bookings", admin_index_path(event)%></td>
+
 			</tr>
 			<% end %>
 	</table>
