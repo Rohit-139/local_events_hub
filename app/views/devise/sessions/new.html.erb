@@ -1,26 +1,35 @@
-<h2>Log in</h2>
-
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <p><%= f.label :email %></p>
-    <p><%= f.email_field :email, autofocus: true, autocomplete: "email" %></p>
+<div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+  <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+    <h2 class="mt-10 text-center text-2xl/9 font-bold tracking-tight text-white">Sign in to your account</h2>
   </div>
 
-  <div class="field">
-    <p><%= f.label :password %></p>
-    <p><%= f.password_field :password, autocomplete: "current-password" %></p>
-  </div>
+  <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
 
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <p><%= f.check_box :remember_me %></p>
-      <p><%= f.label :remember_me %></p>
+
+<%= form_with(model: resource, scope: resource_name, url: session_path(resource_name), builder: CustomFormBuilder) do |f| %>
+
+  <div class="space-y-6">
+    <label class=" text-lg font-medium text-gray-100"><%= f.label :email %> Address</label>
+    <div class="mt-2">
+      <%= f.email_field :email, autofocus: true, autocomplete: "email" , required: true%>
     </div>
-  <% end %>
 
-  <div class="actions">
-    <%= f.submit "Log in" %>
+  </div>
+
+  <div class="space-y-6 mt-4">
+    <label class=" text-lg font-medium text-gray-100 mt-4"><%= f.label :password %></label>
+    <div class="mt-2"><%= f.password_field :password, autocomplete: "current-password" , required: true%></div>
+  </div>
+
+
+
+  <div class="mt-6">
+    <button  type ="submit" class="flex w-full justify-center rounded-md bg-indigo-500 px-3 py-1.5 text-sm/6 font-semibold text-white hover:bg-indigo-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"> <%= f.submit "Log in" %></button>
   </div>
 <% end %>
 
+
+
 <%= render "devise/shared/links" %>
+</div>
+</div>

@@ -68,3 +68,5 @@ end
 gem "devise", "~> 5.0"
 
 gem "geocoder", "~> 1.8"
+
+gem "tailwindcss-rails", "~> 4.4"

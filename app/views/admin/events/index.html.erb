@@ -1,34 +1,35 @@
-<div style="display: flex; gap: 500px;">
-	<h1 style="margin-left: 50px;">All Events </h1>
-	<h3><%= button_to "Logout", destroy_user_session_path, method: :delete %></h3>
-</div>
+<%= render "admin/header" %>
 
-<div>
+<div class="max-h-100 overflow-x-auto mt-2">
 	<% if @events.present? %>
-	<table border="2px" cellpadding="10px">
-		<tr>
-		<th>Name</th>
-		<th>total_seat</th>
-		<th>ticket</th>
-		<th>Action</th>
-		<th>Action</th>
-		<th>Action</th>
-		<th>Action</th>
+	<table class="min-w-full divide-y-2  dark:divide-gray-700">
+		<thead class="sticky top-0  ltr:text-left rtl:text-right dark:bg-gray-900">
+		<tr class="*:font-medium *:text-gray-900 dark:*:text-white">
+		<th class="px-3 py-2 whitespace-nowrap">Name</th>
+		<th class="px-3 py-2 whitespace-nowrap">total seat</th>
+		<th class="px-3 py-2 whitespace-nowrap">ticket</th>
+		<th class="px-3 py-2 whitespace-nowrap">Action</th>
+		<th class="px-3 py-2 whitespace-nowrap">Action</th>
+		<th class="px-3 py-2 whitespace-nowrap">Action</th>
+		<th class="px-3 py-2 whitespace-nowrap">Bookings</th>
 		</tr>
+	</thead>
 			<% @events.each do |event| %>
-			<tr id="<%= dom_id(event) %>">
-			<td><%= event.name%></td>
-			<td><%= event.total_seat%></td>
-			<td><%= event.ticket_price%></td>
-			<td> <%= link_to "Edit", edit_admin_event_path(event)%></td>
-			<td> <%= link_to "Show", admin_event_path(event)%></td>
-			<td> <%= link_to "Delete",admin_event_path(event), data: {turbo_method: :delete, turbo_confirm: 'are you sure ?'}%></td>
-			<td> <%= link_to "Bookings", admin_index_path(event)%></td>
+			<tbody class="divide-y divide-gray-200 dark:divide-gray-700">
+		    <tr class="*:text-gray-900 *:first:font-medium dark:*:text-white" id="<%= dom_id(event)%>">
+
+			<td  class="px-3 py-2 whitespace-nowrap"><%= event.name%></td>
+			<td  class="px-3 py-2 whitespace-nowrap"><%= event.total_seat%></td>
+			<td  class="px-3 py-2 whitespace-nowrap"><%= event.ticket_price%></td>
+			<td  class="px-5 py-2 whitespace-nowrap bg-yellow-700 rounded"> <%= link_to "Edit", edit_admin_event_path(event)%></td>
+			<td  class="px-5 py-2 whitespace-nowrap bg-green-700 rounded"> <%= link_to "Show", admin_event_path(event)%></td>
+			<td  class="px-5 py-2 whitespace-nowrap bg-red-700"> <%= link_to "Delete",admin_event_path(event), data: {turbo_method: :delete, turbo_confirm: 'are you sure ?'}%></td>
+			<td  class="px-5 py-2 whitespace-nowrap bg-gray-600 "> <%= link_to "Bookings", admin_index_path(event)%></td>
 
 			</tr>
+		</tbody>
 			<% end %>
 	</table>
-	<%= link_to "Create new Event", new_admin_event_path %>
 	<% else %>
 	<h3>There is no events listed yet</h3>
 	<%= link_to "Create new Event", new_admin_event_path %>

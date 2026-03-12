@@ -1,0 +1,38 @@
+<header class=" dark:bg-gray-700">
+   <div class="mx-auto flex h-16 max-w-7xl items-center gap-8 px-4 sm:px-6 lg:px-8">
+   	      <nav aria-label="Global" class="hidden md:block">
+            <ul class="flex items-center gap-10 text-sm">
+            	<li>
+            	<p class="text-gray-500 transition hover:text-gray-500/75 dark:text-white
+            	dark:hover:text-white/75 text-2xl ">Local Events Hub</p>	
+            	</li>
+
+              <li>
+            <p class="text-gray-500 transition hover:text-gray-500/75 dark:text-white dark:hover:text-white/75">
+              <%= link_to "Home", admin_events_path %>
+            </p>
+          </li>
+
+          <li>
+            <p class="text-gray-500 transition hover:text-gray-500/75 dark:text-white dark:hover:text-white/75">
+              <%= link_to "Create Event", new_admin_event_path %>
+            </p>
+          </li>
+
+           <li>
+            <p class="text-gray-500 transition hover:text-gray-500/75 dark:text-white dark:hover:text-white/75">
+              <%= link_to "Bookings ", new_admin_event_path %>
+            </p>
+          </li>
+
+          <li>
+            <p class="text-gray-500 transition hover:text-gray-500/75 dark:text-white dark:hover:text-white/75">
+              <%= link_to "Logout", destroy_user_session_path, data: { turbo_method: :delete } %>
+            </p>
+          </li>
+      </ul>
+  </nav>
+
+
+</div>
+</header>

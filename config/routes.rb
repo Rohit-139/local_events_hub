@@ -64,7 +64,9 @@ end
     end
   end
 
-  match "*unmatched_route", to: redirect("/"), via: :all
+match '*path', to: redirect('/'), via: :all, constraints: lambda { |req|
+  req.path.exclude?('/rails/active_storage')
+}
 
   
 end

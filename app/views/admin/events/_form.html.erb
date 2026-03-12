@@ -1,6 +1,74 @@
-<%= form_with(model:[:admin, event] ) do |form| %>
+<div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+  
+
+  <div class=" sm:mx-auto sm:w-full sm:max-w-sm">
+
+
+
+<%= form_with(model:[:admin, event] , builder: CustomFormBuilder )  do |form| %>
+  
+
+  <div class="space-y-6">
+    <label class=" text-lg font-medium text-gray-100"><%= form.label :name %> </label>
+  	<div class="mt-2">
+      <%= form.text_field :name, autofocus: true, autocomplete: "name" , required: true%>
+    </div>
+  </div>
+
+
+    <div class = "space-y-6 mt-2">
+  	 <label class="text-lg font-medium text-gray-100"> <%= form.label :description %> </label>
+  	<%= form.text_field :description  , autofocus: true, autocomplete: "description" , required: true %>
+  </div>
+
+
+
+    <div class = "space-y-6 mt-2">
+     <label class="text-lg font-medium text-gray-100"> <%= form.label :total_seat %> </label>
+    <%= form.number_field :total_seat  , autofocus: true, autocomplete: "description" , required: true %>
+  </div>
+
+
+    <div class = "space-y-6 mt-2">
+     <label class="text-lg font-medium text-gray-100"> <%= form.label :ticket_price %> </label>
+    <%= form.number_field :ticket_price  , autofocus: true, autocomplete: "description" , required: true %>
+  </div>
+
+    
+    <div class = "space-y-6 mt-2">
+     <label class="text-lg font-medium text-gray-100"> <%= form.label :street %> </label>
+    <%= form.text_field :street  , autofocus: true, autocomplete: "description" , required: true %>
+  </div>
+
+    
+    <div class = "space-y-6 mt-2">
+     <label class="text-lg font-medium text-gray-100"> <%= form.label :city %> </label>
+    <%= form.text_field :city  , autofocus: true, autocomplete: "description" , required: true %>
+  </div>
+
+
+    <div class = "space-y-6 mt-2">
+     <label class="text-lg font-medium text-gray-100"> <%= form.label :state %> </label>
+    <%= form.text_field :state  , autofocus: true, autocomplete: "description" , required: true %>
+  </div>
+
+
+    <div class="space-y-6 mt-2">
+    	<div>
+  	<label class="text-lg font-medium text-gray-100"> <%= form.label :image %> </label>
+  	<% if event.image.attached? && @event.persisted? %>
+  	<%= image_tag event.image.representation(resize_to_limit: [200,200])%>
+  	<p>want to change image ?</p>
+  	<%= form.file_field :image %>
+  	<% else %>
+  	<%= form.file_field :image, required: true %>
+  	<% end %>
+  	</div>
+  	
+  </div>
+
   <% if event.errors.any? %>
-    <div style="color: red">
+    <div class="text-red-700">
       <h2><%= pluralize(event.errors.count, "error") %> prohibited this event from being saved:</h2>
 
       <ul>
@@ -11,73 +79,11 @@
     </div>
   <% end %>
 
-  <div>
-  	<%= form.label :name, style: "display: block" %>
-  	<%= form.text_field :name, required: true %>
+  <div class="mt-6">
+    <button  type ="submit" class="flex w-full justify-center rounded-md bg-indigo-500 px-3 py-1.5 text-sm/6 font-semibold text-white hover:bg-indigo-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"> <%= form.submit %></button>
   </div>
 
-  <br>
-
-    <div>
-  	<%= form.label :description, style: "display: block" %>
-  	<%= form.text_field :description , required: true %>
-  </div>
-
-  <br>
-
-    <div>
-  	<%= form.label :total_seat, style: "display: block" %>
-  	<%= form.number_field :total_seat , required: true  %>
-  </div>
-
-<br>
-    <div>
-  	<%= form.label :ticket_price, style: "display: block" %>
-  	<%= form.number_field :ticket_price , required: true  %>
-  </div>
-
-<br>
-    <div>
-  	<%= form.label :street, style: "display: block" %>
-  	<%= form.text_field :street , required: true  %>
-  </div>
-
-  <br>
-
-    <div>
-  	<%= form.label :city, style: "display: block" %>
-  	<%= form.text_field :city , required: true  %>
-  </div>
-
-
-<br>
-    <div>
-  	<%= form.label :state, style: "display: block" %>
-  	<%= form.text_field :state , required: true  %>
-  </div>
-
-
-<br>
-    <div>
-    	<div>
-  	<%= form.label :image, style: "display: block" %>
-  	<% if event.image.attached? %>
-  	<%= image_tag event.image.representation(resize_to_limit: [200,200])%>
-  	<p>want to change image ?</p>
-  	<%= form.file_field :image %>
-  	<% else %>
-  	<%= form.file_field :image, required: true %>
-  	<% end %>
-  	</div>
-  	
-  	
-  </div>
-
-
-
-<br>
-  <div>
-  	<%= form.submit %>
-  </div>
 
   <%end %>
+</div>
+</div>

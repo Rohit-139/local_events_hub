@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+  <html class="h-full bg-gray-800">
   <head>
     <title><%= content_for(:title) || "Local Events Hub" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -23,9 +23,9 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
+  <body class= "h-full">
     <% flash.each do |type, msg| %>
-      <div>
+      <div class= "text-gray-100">
         <%= msg %>
       </div>
     <% end %>

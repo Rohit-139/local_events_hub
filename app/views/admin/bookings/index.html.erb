@@ -1,14 +1,12 @@
-<br>
-<%= link_to "← Back to home", admin_events_path %>
-<br><br>
+<%= render "admin/header" %>
 
 
-<div style="max-width:1000px;margin:40px auto;background:#ffffff;
+<div class="bg-gray-800 mt-4 " style="max-width:1000px;margin:40px auto:
             padding:25px;border-radius:8px;
             box-shadow:0 4px 12px rgba(0,0,0,0.08);
             font-family:Arial, sans-serif;">
 
-  <h2 style="margin-bottom:20px;"> My Bookings</h2>
+  <h2 class="text-gray-100 w-40 mx-auto text-xl" style="margin-bottom:20px;"> My Bookings</h2>
 
   <% if @bookings.any? %>
     <table style="width:100%;border-collapse:collapse;">

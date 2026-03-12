@@ -1,44 +1,50 @@
-
+<div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+  <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+    <h2 class="mt-10 text-center text-2xl/9 font-bold tracking-tight text-white"> Create account</h2>
+  </div>
  
-<h2>Sign up</h2>
+<div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+<%= form_with(model: resource, scope: resource_name, url: registration_path(resource_name), builder: CustomFormBuilder) do |f| %>
+  
 
-    <div class="field">
-    <p><%= f.label :name %></p>
-    <p><%= f.text_field :name, autofocus: true, autocomplete: "name" %></p>
+    <div class="space-y-6">
+    <label class=" text-lg font-medium text-gray-100"><%= f.label :name %></label>
+    <p><%= f.text_field :name, autofocus: true, autocomplete: "name" , required: true %></p>
   </div>
 
-  <div class="field">
-    <p><%= f.label :email %></p>
-    <p><%= f.email_field :email, autofocus: true, autocomplete: "email" %></p>
+  <div class="space-y-6 mt-4">
+    <label class="text-lg font-medium text-gray-100"><%= f.label :email %> Address</label>
+    <p><%= f.email_field :email, autofocus: true, autocomplete: "email",  required: true %></p>
   </div>
 
-  <div class="field">
-    <p><%= f.label :password %></p>
+  <div class="space-y-6 mt-4">
+    <label class="text-lg font-medium text-gray-100"><%= f.label :password %></label>
     <% if @minimum_password_length %>
-      <p><em>(<%= @minimum_password_length %> characters minimum)</em></p>
+      <p class="text-gray-100 text-sm"><em>(<%= @minimum_password_length %> characters minimum)</em></p>
     <% end %>
-    <p><%= f.password_field :password, autocomplete: "new-password" %></p>
+    <p><%= f.password_field :password, autocomplete: "new-password"  , required: true%></p>
   </div>
 
-  <div class="field">
-    <p><%= f.label :password_confirmation %></p>
-    <p><%= f.password_field :password_confirmation, autocomplete: "new-password" %></p>
+  <div class="space-y-6 mt-4">
+    <label class="text-lg font-medium text-gray-100"><%= f.label :password_confirmation %></label>
+    <p><%= f.password_field :password_confirmation, autocomplete: "new-password", required: true %></p>
   </div>
 
-  <div >
-  <%= f.label :type, "For Admin" %> <br>
-  <%= f.checkbox :type %> 
+  <div class="space-y-6 mt-4">
+ <label class="text-lg font-medium text-gray-100"><%= f.label :type, "For Admin" %></label> 
+  <span class="px-4"><%= f.checkbox :type %> </span> 
 </div>
 
-<br>
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
+
+  <div class="space-y-6  mt-4">
+   <button type="submit" class="flex w-full justify-center rounded-md bg-indigo-500 px-3 py-1.5 text-sm/6 font-semibold text-white hover:bg-indigo-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"><%= f.submit "Sign up" %></button> 
   </div>
 <% end %>
+<%= render "devise/shared/error_messages", resource: resource %>
 
 <%= render "devise/shared/links" %>
+
+</div>
 
