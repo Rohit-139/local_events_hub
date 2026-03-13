@@ -4,8 +4,6 @@
 
   <div class=" sm:mx-auto sm:w-full sm:max-w-sm">
 
-
-
 <%= form_with(model:[:user, address] , builder: CustomFormBuilder )  do |form| %>
   
 
@@ -31,10 +29,10 @@
 
   <% if address.errors.any? %>
     <div class="text-red-700">
-      <h2><%= pluralize(event.errors.count, "error") %> prohibited this event from being saved:</h2>
+      <h2><%= pluralize(address.errors.count, "error") %> prohibited this event from being saved:</h2>
 
       <ul>
-        <% event.errors.each do |error| %>
+        <% address.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
       </ul>
