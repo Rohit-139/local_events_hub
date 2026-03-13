@@ -1,5 +1,5 @@
- <div>
- 	<span><%= link_to "Back to home Page ", user_events_path %></span>
- 	<h1>Edit the address</h1>
- </div>
+<%= render "user/header" %>
+
+
+ <h3 class="text-gray-100 mt-4 text-3xl text-center">Edit Address</h3>
  <%= render "form", address: @address %>

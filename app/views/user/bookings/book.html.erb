@@ -1,13 +1,29 @@
-<h1>Verify Email</h1>
+<%= render "user/header" %>
+<div class="max-w-md mx-auto border max-w-sm mt-20 bg-gray-400 mt-6 rounded">
+    <div class="w-48 mx-auto font-bold text-3xl p-2">Verify otp</div>
+      
+      <%= turbo_frame_tag "otp_form" do %>
+      <%= form_with url: user_send_otp_path, method: :post do |f| %>
+        <div class="w-72 mx-auto font-medium text-lg">Email Address: <%= current_user.email %></div>   
+        <%= f.hidden_field :id, value: @id %>
 
-<%= turbo_frame_tag "otp_form" do %>
-  <%= form_with url: user_send_otp_path, method: :post do |f| %>
-    <p>Email: <%= current_user.email %></p>
-  <%= f.hidden_field :id, value: @id %>
-    <div id="otp_container">
-      <%= f.submit "Send OTP", id: "submit_btn" %>
-    </div>
-  <% end %>
-<% end %>
+        <div id="otp_container" class="m-2">
+          <button  type ="submit" class="flex w-48 mx-auto justify-center rounded-md bg-indigo-500 px-3 py-1.5 text-sm/6 font-semibold text-white hover:bg-indigo-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"><%= f.submit "send otp", id:"submit_btn" %> </button>
+        
+        </div>
+        <%end %> 
+        <%end %> 
+</div>
 
-<div id="flash_messages"></div>
+
+
+
+
+
+
+
+
+
+
+
+

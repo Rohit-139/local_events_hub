@@ -1,3 +1,7 @@
-<h1>You are verified </h1>
-<p>you are succesully verified your otp now click the below link and the ticket will be send to  your registered gmail account thank yoy</p>
-<%= link_to "Click here to get your ticket", user_mail_ticket_path(@id) %>
+<div class="max-w-md  mx-auto border max-w-sm mt-20 bg-gray-400 mt-6 rounded">
+	<div class="w-48  mt-2 mx-auto font-bold text-2xl ">You are Verified</div>
+	<div class="w-96 mt-4 text-xl mx-auto">you are succesully verified your otp now click the below link and the ticket will be send to  your registered gmail account thank you</div>
+
+	<button  type ="submit" class="flex py-2 px-2 mx-2 mt-4 w-72 mx-auto justify-center rounded-md bg-indigo-500 px-3 py-1.5 text-sm/6 font-semibold text-white hover:bg-indigo-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"> <%= link_to "Click here to get your ticket", user_mail_ticket_path(@id) %></button>
+</div>
+

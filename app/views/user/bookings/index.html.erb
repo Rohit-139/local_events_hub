@@ -1,6 +1,4 @@
-<br>
-<%= link_to "← Back to home", user_events_path %>
-<br><br>
+
 
 
 <div style="max-width:1000px;margin:40px auto;background:#ffffff;
@@ -8,7 +6,7 @@
             box-shadow:0 4px 12px rgba(0,0,0,0.08);
             font-family:Arial, sans-serif;">
 
-  <h2 style="margin-bottom:20px;"> My Bookings</h2>
+  <h2 style="margin-bottom:20px;" class="w-48 mx-auto text-3xl font-bold"> My Bookings</h2>
 
   <% if @bookings.any? %>
     <table style="width:100%;border-collapse:collapse;">
@@ -59,3 +57,5 @@
   <% end %>
 
 </div>
+
+

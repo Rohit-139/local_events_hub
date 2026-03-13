@@ -1,3 +1,11 @@
-<div class="message <%# message.user == current_user ? 'mine' : 'other' %>">
-  <strong><%= message.user.type %>:</strong> <%= message.body %>
+<% is_admin = message.user.type == "Customer" %>
+<div class="flex <%= is_admin ? 'justify-start' : 'justify-end' %>">
+  <div class="max-w-xs mt-2 md:max-w-md p-3 rounded-lg <%= is_admin ? 'bg-gray-200 text-black' : 'bg-gray-900 text-white' %>">
+    <p class="px-2 text-md"><%= message.body %></p>
+    <span class="text-xs px-2 <%= is_admin ? 'text-gray-600' : 'text-blue-100' %>">
+      <%= message.created_at.strftime("%H:%M") %>
+    </span>
+  </div>
 </div>
+
+

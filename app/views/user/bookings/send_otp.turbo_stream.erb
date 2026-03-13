@@ -1,17 +1,21 @@
 <%= turbo_stream.update "otp_container" do %>
-  <%= form_with url: user_verify_otp_path, method: :post do |f| %>
+<div class="w-48 mx-auto">
+  <%= form_with url: user_verify_otp_path, builder: CustomFormBuilder,  method: :post do |f| %>
     <%= f.telephone_field :otp, 
     placeholder: "Enter 5-digit OTP", 
     required: true, 
     maxlength: 5, 
     minlength: 5, 
     pattern: "[0-9]{5}", 
-    title: "Please enter exactly 5 digits" 
+    title: "Please enter exactly 5 digits" ,
+    oninput: "this.value = this.value.replace(/[^0-9]/g, '');"
 %>
   <%= f.hidden_field :id, value: @id %>
 
-    <br><br>
-    <%= f.submit "Confirm", id: "confirm_btn" %>
+  
+    <button  type ="submit" class="flex w-48 mt-2 mx-auto justify-center rounded-md bg-indigo-500 px-3 py-1.5 text-sm/6 font-semibold text-white hover:bg-indigo-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"> <%= f.submit "Confirm", id: "confirm_btn" %></button>
+    
   <% end %>
 <% end %>
 
+</div>

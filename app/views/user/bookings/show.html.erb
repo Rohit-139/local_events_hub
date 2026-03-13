@@ -1,3 +1,124 @@
+<%= render "user/header" %>
+
+<div  class="block w-96 mx-auto rounded-lg p-4 shadow-xs shadow-indigo-100 mt-6">
+   
+    <div class="mt-2">
+        <dl>
+            <div>
+             <dt class="sr-only">Name</dt>
+        <dd class="text-lg text-gray-100">Customer Name: <%=@booking.customer.name%></dd>
+            </div>
+
+
+            <div>
+        <dt class="sr-only">Description</dt>
+        <dd class="font-medium text-sm text-gray-300">Email: <%= @booking.customer.email %></dd>
+      </div>
+        </dl>
+
+
+        <div class="mt-6 flex items-center gap-24 text-xs">
+      <div class="sm:inline-flex sm:shrink-0 sm:items-center sm:gap-2">
+       
+        <div class="mt-1.5 sm:mt-0">
+          <p class="text-gray-200">Booking id</p>
+
+          <p class="font-medium text-gray-100"><%= @booking.id %></p>
+        </div>
+      </div>
+
+
+
+      <div class="sm:inline-flex sm:shrink-0 sm:items-center sm:gap-2">
+        <div class="mt-1.5 sm:mt-0">
+          <p class="text-gray-200">Seat number</p>
+
+          <p class="font-medium text-gray-100"><%= @booking.seat_number %></p>
+        </div>
+      </div>
+        
+     
+    </div>
+
+
+
+        <dl>
+            <div class="mt-2">
+             <dt class="sr-only">Name</dt>
+        <dd class="text-lg text-gray-100"><%=@booking.event.name%></dd>
+            </div>
+
+
+            <div>
+        <dt class="sr-only">Description</dt>
+        <dd class="font-medium text-sm text-gray-300"><%= @booking.event.description %></dd>
+      </div>
+        </dl>
+
+
+        <div class="mt-6 flex items-center gap-18 text-xs">
+      <div class="sm:inline-flex sm:shrink-0 sm:items-center sm:gap-2">
+       
+        <div class="mt-1.5 sm:mt-0">
+          <p class="text-gray-200">Ticket Price</p>
+
+          <p class="font-medium text-gray-100"><%= @booking.event.ticket_price %></p>
+        </div>
+      </div>
+
+
+
+      <div class="sm:inline-flex sm:shrink-0 sm:items-center sm:gap-2">
+        <div class="mt-1.5 sm:mt-0">
+          <p class="text-gray-200">Total seats</p>
+
+          <p class="font-medium text-gray-100"><%= @booking.event.total_seat %></p>
+        </div>
+      </div>
+        
+       <div class="sm:inline-flex sm:shrink-0 sm:items-center sm:gap-2">
+        <div class="mt-1.5 sm:mt-0">
+          <p class="text-gray-200">Available seats</p>
+
+          <p class="font-medium text-gray-100"><%= @booking.event.available_seat %></p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="mt-4 text-bold text-gray-300">Address: <%= @booking.event.address %></div>
+</div>
+</div>
+
+
+
+</div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <span><%= link_to "Back to home Page ", user_bookings_path %></span>
 
   <h2>Booking</h2>

@@ -1,36 +1,60 @@
-<div style="display: flex; gap: 150px;">
-	<%= form_with url: user_events_path, method: :get, local: true do |f| %>
-  <%= f.label :distance, "Events within (km):" %>
-  <%= f.number_field :distance, value: @distance, min: 1 %>
-  <%= f.submit "Filter" %>
-<% end %>
-<h3><%= link_to "See Bookings", user_bookings_path %></h3>
-<h4><%= link_to "Change address", edit_user_address_path(current_user) %></h4>
-<h3><%= button_to "Logout", destroy_user_session_path, method: :delete %></h3>
+<%= render "user/header" %>
+
+<div class="bg-gray-500 rounded-lg mt-2 shadow-lg p-6 w-48 max-w-md">
+  <h2 class="text-md px-2 text-gray-100 font-bold mb-4">Distance Filter</h2>
+  <div class="mb-4">
+    
+    <input type="range" id="price-range" class="w-full accent-indigo-600" min="0" max="1000" value="500" oninput="updatePrice(this.value)">
+      
+  </div>
+  <div class="flex justify-between text-gray-100">
+    <span class="px-2" id="minPrice">0 Km</span>
+    <span class="px-2" id="maxPrice">1000 Km</span>
+  </div>
+</div>
+
+<div class="max-h-100 overflow-x-auto mt-2">
+    <% if @events.present? %>
+    <table class="min-w-full divide-y-2  dark:divide-gray-700">
+        <thead class="sticky top-0  ltr:text-left rtl:text-right dark:bg-gray-900">
+        <tr class="*:font-medium *:text-gray-900 dark:*:text-white">
+        <th class="px-3 py-2 whitespace-nowrap">Name</th>
+        <th class="px-3 py-2 whitespace-nowrap">total seat</th>
+        <th class="px-3 py-2 whitespace-nowrap">Available seat</th>
+        <th class="px-3 py-2 whitespace-nowrap">ticket</th>
+        <th class="px-3 py-2 whitespace-nowrap">Action</th>
+ 
+        </tr>
+    </thead>
+            <% @events.each do |event| %>
+            <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
+            <tr class="*:text-gray-900 *:first:font-medium dark:*:text-white" id="<%= dom_id(event)%>">
+
+            <td  class="px-3 py-2 whitespace-nowrap"><%= event.name%></td>
+            <td  class="px-3 py-2 whitespace-nowrap"><%= event.total_seat%></td>
+            <td  class="px-3 py-2 whitespace-nowrap"><%= event.available_seat%></td>
+            <td  class="px-3 py-2 whitespace-nowrap"><%= event.ticket_price%></td>
+            
+            <td  class="px-5 py-2 whitespace-nowrap bg-green-700 rounded"> <%= link_to "Show", user_event_path(event)%></td>
+
+            </tr>
+        </tbody>
+            <% end %>
+    </table>
+    <% else %>
+    <div class="min-w-full bg-gray-300 h-96">
+        <h2 align="center" class="text-3xl font-bold mt-4 p-4">There is no events listed yet </h2>
+    
+    <% end %></div>
 </div>
 
 
-<% if @events.present? %>
-<h3>All events under <%= @distance %>  km </h3>
-    <table border="2px" cellpadding="10px">
-        <tr>
-        <th>Name</th>
-        <th>total_seat</th>
-        <th>ticket</th>
-        <th>Action</th>
-        </tr>
-            <% @events.each do |event| %>
-            <tr id="<%= dom_id(event) %>">
-            <td><%= event.name%></td>
-            <td><%= event.total_seat%></td>
-            <td><%= event.ticket_price%></td>
-            <td> <%= link_to "Show", user_event_path(event)%></td>
-            </tr>
-            <% end %>
-    </table>
+<script>
+  function updatePrice(value) {
+    document.getElementById("minPrice").textContent =   value + "km";
 
-<% else %>
-<h2>no Events in near <%= @distance %> km</h2>
-<% end %>
+  }
+</script>
+
 
 
